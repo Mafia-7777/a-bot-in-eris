@@ -3,9 +3,11 @@ const eris = require("eris");
 module.exports = class Bot extends eris.Client{
     constructor(token, options){
         super(token, options);
-
+        
         this.cmds = new Map();
         this.alli = new Map();
+
+        this.logger = new (require("../helpers/logger"))
     
     };
 
@@ -17,10 +19,22 @@ module.exports = class Bot extends eris.Client{
             file.cmd.alli.forEach(alli => {
                 this.alli.set(alli, file);
             })
+            this.logger.green(`Loaded command: ${file.cmd.name}`)
         }catch(err){
-            console.log(`Can not load command @ ${cmdPath}. ${err}`)
+            this.logger.yellow(`Can not load command @ ${cmdPath}, ${err}`)
         }
 
     };
+
+    loadEvent(eventPath, bot){
+        try{
+            let eventFile = new (require(eventPath))(this);
+            let eventName = eventPath.split("/")[2].split(".")[0]
+            bot.on(eventName, (...args) => eventFile.run(...args))
+            this.logger.lightGreen(`Event loaded: ${eventName}`)
+        }catch(err){
+            this.logger.yellow(`Can not load command @ ${eventPath}, ${err}`)
+        }
+    }
 
 };

@@ -4,7 +4,7 @@ module.exports = class Help extends cmd{
     constructor(Bot){
         super(Bot, {
             name: `help`,
-            alli: [],
+            alli: ["helpme"],
             category: `Misc`,
             usage: `help [ command ]`,
             bPerms: ["embedLinks"],
@@ -16,7 +16,7 @@ module.exports = class Help extends cmd{
     };
 
 
-    async cmdRun(msg, args, data) {
+    async runCmd(msg, args, data) {
         console.log("testetest")
     }
 
