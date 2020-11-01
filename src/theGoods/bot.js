@@ -1,4 +1,7 @@
+require("dotenv").config();
+
 const eris = require("eris");
+const logger = require("../helpers/logger");
 
 module.exports = class Bot extends eris.Client{
     constructor(token, options){
@@ -7,7 +10,9 @@ module.exports = class Bot extends eris.Client{
         this.cmds = new Map();
         this.alli = new Map();
 
-        this.logger = new (require("../helpers/logger"))
+        this.logger = new logger(this, process.env.logWebHookId, process.env.logWebhookToken);
+        this.config = require("../../config.json");
+        this.colors = require("../../colors")
     
     };
 

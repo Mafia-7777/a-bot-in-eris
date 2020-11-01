@@ -17,7 +17,7 @@ module.exports = class Help extends cmd{
 
 
     async runCmd(msg, args, data) {
-        console.log("testetest")
+        msg.channel.send("hello")
     }
 
 

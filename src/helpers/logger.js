@@ -21,4 +21,23 @@ module.exports = class Logger{
     red(log){
         console.log(chalk.red(`${new Date} ${log}`))
     }
+
+    webHookErr(log, ping){
+
+        if(ping == true){
+            ping = `<@!${this.bot.config.owner}>`
+        }else{
+            ping = "err"
+        }
+        this.bot.executeWebhook(`${this.webHookID}`, `${this.wehHookToken}`, {
+            content: ping,
+            embeds: [
+                {
+                    title: `Err`,
+                    description: log,
+                    color: this.bot.colors.red
+                }
+            ]
+        })
+    }
 }
