@@ -1,0 +1,23 @@
+{
+  "name": "a-bot-in-eris",
+  "version": "1.0.0",
+  "description": "Ill think of a name some day",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/monke-dev/a-bot-in-eris.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/monke-dev/a-bot-in-eris/issues"
+  },
+  "homepage": "https://github.com/monke-dev/a-bot-in-eris#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "eris": "^0.13.3"
+  }
+}
