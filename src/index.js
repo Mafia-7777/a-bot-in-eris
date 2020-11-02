@@ -30,10 +30,9 @@ const bot = new Client(process.env.botToken, {
         TYPING_START: true,
         USER_UPDATE: true,
         VOICE_STATE_UPDATE: true
-        
     }
 
-})
+});
 
 
 
@@ -43,18 +42,18 @@ const init = async () => {
         let files = await util.promisify(fs.readdir)(__dirname + "/theGoods/cmds/" + dir);
         files.forEach(file => {
             bot.loadCmd(`./cmds/${dir}/${file}`);
-        })
-    })
+        });
+    });
 
     const eventFiles = await util.promisify(fs.readdir)(__dirname + "/theGoods/events/");
     eventFiles.forEach(file => {
         bot.loadEvent(`./events/${file}`, bot);
-    })
+    });
 
 }
 
-init()
-connect()
+init();
+connect();
 
 
-bot.connect()
+bot.connect();
