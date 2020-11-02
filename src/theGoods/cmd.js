@@ -2,17 +2,19 @@ module.exports = class Cmd{
     constructor(Bot, {
         name = new String(),
         alli = new Array(),
-        category = new String(),
-        description = new String(),
-        usage = new String(),
+        category = "Other",
+        description = "None was givin",
+        usage = "None was givin",
 
-        cooldown = new Number(),
+        cooldown = 1500,
 
         bPerms = new Array(),
         mPerms = new Array(),
+
+        nsfw = false
         
     }) {
         this.bot = Bot;
-        this.cmd = {name, alli, bPerms, mPerms, cooldown, category, description, usage}
+        this.cmd = {name, alli, bPerms, mPerms, cooldown, category, description, usage, nsfw}
     }
 }

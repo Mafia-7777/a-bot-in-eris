@@ -19,6 +19,7 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "dotenv": "^8.2.0",
-    "eris": "github:monke-dev/eris"
+    "eris": "github:monke-dev/eris",
+    "mongoose": "^5.10.11"
   }
 }

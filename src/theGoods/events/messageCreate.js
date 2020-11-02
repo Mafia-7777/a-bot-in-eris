@@ -1,3 +1,4 @@
+const data = {};
 module.exports = class{
     constructor(bot){
         this.bot = bot;
@@ -5,10 +6,19 @@ module.exports = class{
 
     async run(msg){
         if(msg.author.bot) return;
+        data.server = await this.bot.getData(msg.channel.id);
+        if(!msg.content.startsWith(data.server.config.prefix)) return;
 
-        let args = msg.content.split(" ")
+        let userCmd = msg.content.toLowerCase().split(" ")[0].slice(data.server.config.prefix.length);
+        let args = msg.content.slice(userCmd.length + 2).split(" ")
 
-        let cmd = await this.bot.cmds.get(args[0]) || await this.bot.alli.get(args[0])
-        if(cmd) cmd.runCmd(msg, args)
+        let cmdFile = await this.bot.cmds.get(userCmd)
+        if(!cmdFile) return;
+
+        try{
+            cmdFile.runCmd(msg, args, data)
+        }catch(err){
+            this.bot.logger.red(err)
+        }
     }
 }

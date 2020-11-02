@@ -3,6 +3,9 @@ require("dotenv").config();
 const eris = require("eris");
 const logger = require("../helpers/logger");
 
+const mongo = require("mongoose");
+const Guilds = require("./Mongo/Schems/Guild");
+
 module.exports = class Bot extends eris.Client{
     constructor(token, options){
         super(token, options);
@@ -40,6 +43,24 @@ module.exports = class Bot extends eris.Client{
         }catch(err){
             this.logger.yellow(`Can not load command @ ${eventPath}, ${err}`)
         }
+    }
+
+    async getPrefix(guildID){
+        let data = await Guilds.findOne({id: guildID})
+        if(!data){
+            await new Guilds({id: guildID}).save();
+            data = await Guilds.findOne({id: guildID});
+        }
+        return data.config.prefix
+    }
+
+    async getData(guildID){
+        let data = await Guilds.findOne({id: guildID})
+        if(!data){
+            await new Guilds({id: guildID}).save();
+            data = await Guilds.findOne({id: guildID});
+        }
+        return data;
     }
 
 };
