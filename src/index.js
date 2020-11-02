@@ -1,14 +1,16 @@
+require("dotenv").config();
+
 const util = require("util");
 const fs = require("fs");
-require("dotenv").config();
-const Client = require("./theGoods/bot");
 
+const Client = require("./theGoods/bot");
+const { connect } = require("./theGoods/Mongo/connect");
 
 const bot = new Client(process.env.botToken, {
     restMode: true
 })
 
-const { connect } = require("./theGoods/Mongo/connect");
+
 
 const init = async () => {
     const cmdDirs = await util.promisify(fs.readdir)(__dirname + "/theGoods/cmds/");
