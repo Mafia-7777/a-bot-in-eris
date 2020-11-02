@@ -1,5 +1,3 @@
-//LOL LOOK AT THIS DUMB DUMB LOOKING AT THIS 
-
 module.exports = {
     main: 0xff8c00,
     red: 0xff0000,
@@ -9,4 +7,3 @@ module.exports = {
     orange: 0xFF7F00,
     blue: 0x0000ff
 }
-//Any other colors
