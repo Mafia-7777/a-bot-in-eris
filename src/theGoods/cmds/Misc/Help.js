@@ -48,7 +48,7 @@ module.exports = class Help extends cmd{
 
             if(cmd){
                 msg.channel.send({embed: {
-                    title: cmd.cmd.name,
+                    title: `${cmd.cmd.name}, \`${cmd.cmd.alli.join("`, `")||"No aliases"}\``,
                     description: `\`${cmd.cmd.description}\``,
                     color: this.bot.colors.main,
                     fields: [
@@ -77,7 +77,6 @@ module.exports = class Help extends cmd{
             }else{
                 msg.channel.sendErrEmbed(`***${args[0]}*** is not a command`)
             }
-            console.log(cmd)
         }
         
 
