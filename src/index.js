@@ -1,36 +1,12 @@
-require("dotenv").config();
+require("dotenv").config(); // .env vars
 
 const util = require("util");
 const fs = require("fs");
 
-const Client = require("./theGoods/bot");
-const { connect } = require("./theGoods/Mongo/connect");
+const Client = require("./theGoods/bot"); // imports client
+const { connect } = require("./theGoods/Mongo/connect"); // imports data base connection
 
 const bot = new Client(process.env.botToken, {
-    restMode: true,
-    disableEvents: {
-        CHANNEL_CREATE: true,
-        CHANNEL_DELETE: true,
-        CHANNEL_UPDATE: true,
-        GUILD_BAN_ADD: true,
-        GUILD_BAN_REMOVE: true,
-        GUILD_CREATE: true,
-        GUILD_DELETE: true,
-        GUILD_MEMBER_ADD: true,
-        GUILD_MEMBER_REMOVE: true,
-        GUILD_MEMBER_UPDATE: true,
-        GUILD_ROLE_CREATE: true,
-        GUILD_ROLE_UPDATE: true,
-        GUILD_UPDATE: true,
-        MESSAGE_CREATE: true,
-        MESSAGE_DELETE: true,
-        MESSAGE_DELETE_BULK: true,
-        MESSAGE_UPDATE: true,
-        PRESENCE_UPDATE: true,
-        TYPING_START: true,
-        USER_UPDATE: true,
-        VOICE_STATE_UPDATE: true
-    }
 
 });
 
@@ -52,8 +28,8 @@ const init = async () => {
 
 }
 
-init();
-connect();
+init(); // sets cmds and allis
+connect(); //Connects the data base
 
 
-bot.connect();
+bot.connect(); // Connects the bot to discord
