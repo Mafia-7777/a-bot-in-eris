@@ -8,7 +8,6 @@ module.exports = class{
 
     async handleCooldown(id, cmd, msg){
         let coolDown = await this.cooldown.get(`${id}_${cmd.cmd.name}`);
-        console.log(coolDown)
         if(coolDown){
             return msg.channel.sendErrEmbed(`You are in cooldown still, Time left: ${prettyMs(cmd.cmd.cooldown - (Date.now() - coolDown) )}`)
         }else{
