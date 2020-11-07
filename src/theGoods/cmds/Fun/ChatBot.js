@@ -27,11 +27,9 @@ module.exports = class Help extends cmd{
                 allowedMentions: []
             })
         })
-        
 
 
 
-        
     };
 
 
