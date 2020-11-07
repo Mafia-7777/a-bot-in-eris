@@ -48,7 +48,7 @@ module.exports = class Help extends cmd{
 
             if(cmd){
                 msg.channel.send({embed: {
-                    title: `${cmd.cmd.name}, \`${cmd.cmd.alli.join("`, `")||"No `aliases`"}\``,
+                    title: `${cmd.cmd.name}, \`${cmd.cmd.alli.join("`, `")||"No aliases"}\``,
                     description: `\`${cmd.cmd.description}\``,
                     color: this.bot.colors.main,
                     fields: [
