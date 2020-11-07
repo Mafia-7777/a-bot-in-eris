@@ -1,11 +1,9 @@
 {
   "name": "a-bot-in-eris",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Ill think of a name some day",
   "main": "src/index.js",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "run": "node disk/index"
   },
   "repository": {
     "type": "git",

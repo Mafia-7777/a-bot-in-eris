@@ -26,7 +26,7 @@ module.exports = class{
         let userCmd = msg.content.toLowerCase().split(" ")[0].slice(data.server.config.prefix.length);
         let args = msg.content.slice(userCmd.length + 2).split(" ")
 
-        let cmdFile = await this.bot.cmds.get(userCmd)
+        let cmdFile = await this.bot.cmds.get(userCmd) || this.bot.alli.get(userCmd)
         if(!cmdFile) return;
 
         let inCooldown = await this.handleCooldown(msg.author.id, cmdFile, msg);
