@@ -20,7 +20,13 @@ module.exports = class{
 
     async runEvent(msg){
         if(msg.author.bot || !msg.channel.guild) return;
+
         data.server = await this.bot.getGuildData(msg.channel.id);
+        data.otherData = await this.bot.getOtherData();
+
+        if(data.otherData.blackList.users.includes(msg.author.id) || data.otherData.blackList.guilds.includes(msg.channel.guild.id)) return;
+
+
         if(!msg.content.startsWith(data.server.config.prefix)) return;
 
         let userCmd = msg.content.toLowerCase().split(" ")[0].slice(data.server.config.prefix.length);
@@ -29,13 +35,15 @@ module.exports = class{
         let cmdFile = await this.bot.cmds.get(userCmd) || this.bot.alli.get(userCmd)
         if(!cmdFile) return;
 
+        if(cmdFile.cmd.category == "Owner" && msg.author.id != this.bot.config.owner) return msg.channel.sendErrEmbed("This is a owner only command")
+
         let userPerms = msg.channel.permissionsOf(msg.author.id);
         let botPerms = msg.channel.permissionsOf(this.bot.user.id);
 
         if(!botPerms.has("embedLinks")){
             try{
                 let dmChannel = await msg.author.getDMChannel();
-                return dmChannel.sendErrEmbed(`I do not have embedLinks permission in **${msg.channel.guild.name}**, Please give me this permission or tell someone to`)
+                return dmChannel.sendErrEmbed(`I do not have **embedLinks** permission in **${msg.channel.guild.name}**, Please give me this permission or tell someone to`)
             }catch(err){
                 this.bot.logger.yellow(err)
             }
