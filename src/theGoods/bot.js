@@ -3,9 +3,9 @@ require("dotenv").config();
 const eris = require("eris");
 const logger = require("../helpers/logger");
 
-const mongo = require("mongoose");
-const Guilds = require("./Mongo/Schems/Guild");
+const Schems = require("./Mongo/SchemsExports");
 const fetch = require("node-fetch");
+
 
 module.exports = class Bot extends eris.Client{
     constructor(token, options){
@@ -48,19 +48,37 @@ module.exports = class Bot extends eris.Client{
     }
 
     async getPrefix(guildID){
-        let data = await Guilds.findOne({id: guildID})
+        let data = await Schems.guild.findOne({id: guildID})
         if(!data){
-            await new Guilds({id: guildID}).save();
-            data = await Guilds.findOne({id: guildID});
+            await new Schems.guild({id: guildID}).save();
+            data = await Schems.guild.findOne({id: guildID});
         }
-        return data.config.prefix
+        return data.config.prefix;
     }
 
     async getGuildData(guildID){ //Gets a guilds data from mongo
-        let data = await Guilds.findOne({id: guildID})
+        let data = await Schems.guild.findOne({id: guildID})
         if(!data){
-            await new Guilds({id: guildID}).save();
-            data = await Guilds.findOne({id: guildID});
+            await new Schems.guild({id: guildID}).save();
+            data = await Schems.guild.findOne({id: guildID});
+        }
+        return data;
+    }
+
+    async getUserData(userID){ //gets a users data from mongo
+        let data = await Schems.user.findOne({id: userID});
+        if(!data){
+            await new Schems.user({id: userID}).save();
+            data = await Schems.user.findOne({id: userID});
+        }
+        return data;
+    }
+
+    async getOtherData(id){
+        let data = await Schems.otherData.findOne({id: id ? id : "otherData"});
+        if(!data){
+            await new Schems.otherData({id: id ? id : "otherData"}).save();
+            data = await Schems.otherData.findOne({id: id ? id : "otherData"});
         }
         return data;
     }

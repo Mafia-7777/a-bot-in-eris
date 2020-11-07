@@ -36,6 +36,15 @@ module.exports = class{
 
         try{
             cmdFile.runCmd(msg, args, data)
+
+            let userData = await this.bot.getUserData(msg.author.id);
+            userData.cmdsUsed += 1;
+
+            let botData = await this.bot.getOtherData();
+            botData.totalCmdsUsed += 1;
+
+            userData.save();
+            botData.save();
         }catch(err){
             this.bot.logger.red(err)
         }
