@@ -19,7 +19,7 @@ module.exports = class{
     }
 
     async runEvent(msg){
-        if(msg.author.bot) return;
+        if(msg.author.bot || !msg.channel.guild) return;
         data.server = await this.bot.getGuildData(msg.channel.id);
         if(!msg.content.startsWith(data.server.config.prefix)) return;
 
@@ -28,6 +28,32 @@ module.exports = class{
 
         let cmdFile = await this.bot.cmds.get(userCmd) || this.bot.alli.get(userCmd)
         if(!cmdFile) return;
+
+        let userPerms = msg.channel.permissionsOf(msg.author.id);
+        let botPerms = msg.channel.permissionsOf(this.bot.user.id);
+
+        if(!botPerms.has("embedLinks")){
+            try{
+                let dmChannel = await msg.author.getDMChannel();
+                return dmChannel.sendErrEmbed(`I do not have embedLinks permission in **${msg.channel.guild.name}**, Please give me this permission or tell someone to`)
+            }catch(err){
+                this.bot.logger.yellow(err)
+            }
+        }
+
+        let neededPerms = [];
+        cmdFile.cmd.mPerms.forEach(perm => {
+            if(!userPerms.has(perm)) neededPerms.push(perm)
+        })
+        if(!neededPerms.length == 0)return msg.channel.sendErrEmbed(`Your are missing permissions to do this: \`${neededPerms.join("`, `")}\``)
+
+        let needPermsBot = [];
+        
+        cmdFile.cmd.bPerms.forEach(perm => {
+            if(!botPerms.has(perm)) needPermsBot.push(perm)
+        })
+        if(!needPermsBot.length == 0) return msg.channel.sendErrEmbed(`I am missing permissions to do this: \`${needPermsBot.join("`, `")}\``)
+        
 
         let inCooldown = await this.handleCooldown(msg.author.id, cmdFile, msg);
         if(inCooldown) return;
