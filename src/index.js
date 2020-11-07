@@ -7,9 +7,12 @@ const Client = require("./theGoods/bot"); // imports client
 const { connect } = require("./theGoods/Mongo/connect"); // imports data base connection
 
 const bot = new Client(process.env.botToken, {
-
+    allowedMentions: {
+        roles: false,
+        users: false,
+        everyone: false
+    }
 });
-
 
 
 const init = async () => {
@@ -30,6 +33,5 @@ const init = async () => {
 
 init(); // sets cmds and allis
 connect(); //Connects the data base
-
 
 bot.connect(); // Connects the bot to discord

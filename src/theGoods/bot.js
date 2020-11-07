@@ -66,18 +66,7 @@ module.exports = class Bot extends eris.Client{
     }
 
 
-    async getLastChannelAttachment(channel){ //
-        let Imgs = [];
-        let messages = await channel.getMessages();
-        messages.forEach(message => {
-            let push = message.attachments ? message.attachments[0] : null
-            if(push == null) return;
-            Imgs.push(push)
-        })
-        if(Imgs.length == 0) return null;
-        
-        return Imgs[0];
-    }
+    
 
 
     async downLoadVideo(url){
