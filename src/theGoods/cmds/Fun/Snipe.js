@@ -35,7 +35,7 @@ module.exports = class Help extends cmd{
         }
         msg.channel.send({embed: embed})
 
-
+        
 
     };
 

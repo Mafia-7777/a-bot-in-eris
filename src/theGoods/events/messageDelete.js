@@ -11,6 +11,10 @@ module.exports = class{
             content: msg.content ? msg.content : null,
             img: msg.attachments[0] ? msg.attachments[0].proxy_url : null
         })
+
+        setTimeout(() => {
+            if(this.bot.snipes.get(msg.channel.id)) this.bot.snipes.delete(msg.channel.id)
+        }, 30000);
     }
 
 }
