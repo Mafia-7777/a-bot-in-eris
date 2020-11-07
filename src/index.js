@@ -11,7 +11,9 @@ const bot = new Client(process.env.botToken, {
         roles: false,
         users: false,
         everyone: false
-    }
+    },
+    defaultImageFormat: "png",
+    defaultImageSize: 512
 });
 
 
