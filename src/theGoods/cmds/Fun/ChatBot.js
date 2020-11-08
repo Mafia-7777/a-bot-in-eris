@@ -19,7 +19,7 @@ module.exports = class Help extends cmd{
     async runCmd(msg, args, data) {
 
         
-        if(!args[0]) return msg.channel.sendErrEmbed("What would you like to tell me?")
+        if(!args[0]) return msg.channel.sendErrEmbed("What would you like to talk about?")
         fetch(`https://some-random-api.ml/chatbot?message=${encodeURI(args.join(" "))}`, {
             method: "get",
         }).then(j => j.json()).then(json => {

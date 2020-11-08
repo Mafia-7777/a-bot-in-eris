@@ -3,7 +3,7 @@ const cmd = require("../../cmd");
 module.exports = class Help extends cmd{
     constructor(Bot){
         super(Bot, {
-            name: "view-bl",
+            name: "test",
             alli: [],
             category: "Owner",
             usage: "view-bl",
@@ -16,18 +16,11 @@ module.exports = class Help extends cmd{
 
 
     async runCmd(msg, args, data) {
-
-        msg.channel.send({embed: {
-            title: "blackList",
-            color: this.bot.colors.main,
-            description: `
-            **__Users__**
-            ${data.otherData.blackList.users.join("\n") || "None"}
-            **__Servers__**
-            ${data.otherData.blackList.guilds.join("\n") || "None"}`
-        }})
-
+        let url = await this.bot.getLastChannelImage(msg.channel)
+        let img = await this.bot.ImageManipulation.sepia(url)
+        msg.channel.send("", {name: "Sepia.png", file: img})
         
+        //ImageManipulation
     };
 
 

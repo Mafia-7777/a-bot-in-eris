@@ -3,8 +3,7 @@
   "version": "2.0.0",
   "description": "Ill think of a name some day",
   "main": "src/index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/monke-dev/a-bot-in-eris.git"
@@ -19,6 +18,7 @@
     "chalk": "^4.1.0",
     "dotenv": "^8.2.0",
     "eris": "github:monke-dev/eris",
+    "jimp": "^0.16.1",
     "mongoose": "^5.10.11",
     "pretty-ms": "^7.0.1"
   }

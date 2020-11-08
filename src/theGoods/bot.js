@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const eris = require("eris");
 const logger = require("../helpers/logger");
+const ImageManipulation = require("../helpers/ImageManipulation")
 
 const Schems = require("./Mongo/SchemsExports");
 const fetch = require("node-fetch");
@@ -18,6 +19,7 @@ module.exports = class Bot extends eris.Client{
         this.logger = new logger(this, process.env.logWebHookId, process.env.logWebhookToken); //Logs
         this.config = require("../../config.json"); //Config
         this.colors = require("../../colors"); //Colors
+        this.ImageManipulation = new ImageManipulation;
 
         this.snipes = new Map();
 
@@ -84,6 +86,17 @@ module.exports = class Bot extends eris.Client{
             data = await Schems.otherData.findOne({id: id ? id : "otherData"});
         }
         return data;
+    }
+
+    async getLastChannelImage(channel){
+        let fetched = await channel.getMessages(50);
+        let IMGurl = null;
+        await fetched.forEach(msg =>{
+            if(IMGurl != null) return;
+            if(!msg.attachments[0]) return;
+            if(msg.attachments[0].url.endsWith(".png") || msg.attachments[0].url.endsWith(".jpeg") || msg.attachments[0].url.endsWith(".jpg")) IMGurl = msg.attachments[0].url
+        })
+        return IMGurl;
     }
 
 
