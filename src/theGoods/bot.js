@@ -19,7 +19,7 @@ module.exports = class Bot extends eris.Client{
         this.logger = new logger(this, process.env.logWebHookId, process.env.logWebhookToken); //Logs
         this.config = require("../../config.json"); //Config
         this.colors = require("../../colors"); //Colors
-        this.ImageManipulation = new ImageManipulation;
+        this.ImageManipulation = new ImageManipulation({defaultImageFormat: "png"})
 
         this.snipes = new Map();
 
