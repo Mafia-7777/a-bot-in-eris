@@ -18,24 +18,26 @@ module.exports = class Help extends cmd{
 
     async runCmd(msg, args, data) {
         
-
-        let snipe = this.bot.snipes.get(msg.channel.id)
-        if(!snipe) return msg.channel.sendErrEmbed("No messages have been deleted recently")
-        if(snipe.content.length > 999) return msg.channel.sendErrEmbed("This snipe is to big to send here")
-        let embed = {
-            author: {
-                name: snipe.tag,
-                icon_url: snipe.av
-            },
-            image: {
-                url: snipe.img,
-            },
-            description: snipe.content,
-            color: this.bot.colors.main
-        }
-        msg.channel.send({embed: embed})
-
+        try{
+            let snipe = this.bot.snipes.get(msg.channel.id)
+            if(!snipe) return msg.channel.sendErrEmbed("No messages have been deleted recently")
+            if(snipe.content.length > 999) return msg.channel.sendErrEmbed("This snipe is to big to send here")
+            let embed = {
+                author: {
+                    name: snipe.tag,
+                    icon_url: snipe.av
+                },
+                image: {
+                    url: snipe.img,
+                },
+                description: snipe.content,
+                color: this.bot.colors.main
+            }
+            msg.channel.send({embed: embed})
+        }catch(e){} // so no err for non cached messages
         
+
+
 
     };
 

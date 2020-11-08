@@ -50,7 +50,10 @@ module.exports = class Help extends cmd{
             __***Ping***__
             \u3000 **WebSocket**: ${msg.channel.guild.shard.latency} ms
             \u3000 **Database**: ${dbPing} ms
-            `
+            `,
+            footer: {
+                text: `Dev: Mafia boss lvl 420#0001`
+            }
         }   
 
 
