@@ -99,8 +99,20 @@ module.exports = class Bot extends eris.Client{
         return IMGurl;
     }
 
-
-    
+    async postBin(input){
+        let info;
+        await fetch("https://hasteb.in/documents", {
+            method: "POST",
+            body: input,
+            headers: {
+                "Content-Type": "text/plain"
+            }
+        }).then(res => res.json())
+            .then(json => {
+                info = json.key;
+            });
+        return info;
+    }
 
 
     async downLoadVideo(url){
