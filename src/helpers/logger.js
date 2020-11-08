@@ -31,6 +31,7 @@ module.exports = class Logger{
         }
         this.bot.executeWebhook(`${this.webHookID}`, `${this.wehHookToken}`, {
             content: ping,
+            allowedMentions: {users: true},
             embeds: [
                 {
                     title: `Err`,
