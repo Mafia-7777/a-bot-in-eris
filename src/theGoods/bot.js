@@ -14,6 +14,7 @@ module.exports = class Bot extends eris.Client{
         
         this.cmds = new Map(); //Bot commds
         this.alli = new Map(); //Bot alias(es)
+        this.unLoadedCmds = new Map(); //unloaded cmds
         this.cooldown = new Map(); // command cooldown
 
         this.logger = new logger(this, process.env.logWebHookId, process.env.logWebhookToken); //Logs
@@ -40,6 +41,25 @@ module.exports = class Bot extends eris.Client{
         }
 
     };
+
+    async unLoadCmd(cmdName){
+        let cmd = await this.cmds.get(cmdName);
+        if(!cmd) return null;
+        try{
+            this.cmds.delete(cmd.cmd.name);
+
+            this.unLoadedCmds.set(cmd.cmd.name, cmd)
+            cmd.cmd.alli.forEach(alli => {
+                this.alli.delete(alli);
+
+                this.unLoadedCmds.set(alli, cmd)
+            })
+        }catch(err){
+            return err;
+        }
+
+        return cmd.cmd;
+    }
 
     loadEvent(eventPath, bot){ //Loads a event
         try{

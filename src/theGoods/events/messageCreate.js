@@ -1,5 +1,6 @@
 const data = {};
 const prettyMs = require("pretty-ms")
+const mongo = require("mongoose");
 module.exports = class{
     constructor(bot){
         this.bot = bot;
@@ -19,12 +20,15 @@ module.exports = class{
     }
 
     async runEvent(msg){
+
+
+
         if(msg.author.bot || !msg.channel.guild) return;
 
         data.server = await this.bot.getGuildData(msg.channel.id);
         data.otherData = await this.bot.getOtherData();
 
-        if(data.otherData.blackList.users.includes(msg.author.id) || data.otherData.blackList.guilds.includes(msg.channel.guild.id)) return;
+        if(data.otherData.blackList.users.includes(msg.author.id) && msg.author.id != this.bot.config.owner || data.otherData.blackList.guilds.includes(msg.channel.guild.id) && msg.author.id != this.bot.config.owner) return;
 
 
         if(!msg.content.startsWith(data.server.config.prefix)) return;

@@ -6,7 +6,7 @@ module.exports = class Help extends cmd{
             name: "test",
             alli: [],
             category: "Owner",
-            usage: "view-bl",
+            usage: "test",
             bPerms: ["embedLinks"],
             mPerms: ["sendMessages"],
             cooldown: 0,
@@ -16,11 +16,7 @@ module.exports = class Help extends cmd{
 
 
     async runCmd(msg, args, data) {
-        let url = await this.bot.getLastChannelImage(msg.channel)
-        let img = await this.bot.ImageManipulation.sepia(url)
-        msg.channel.send("", {name: "Sepia.png", file: img})
         
-        //ImageManipulation
     };
 
 

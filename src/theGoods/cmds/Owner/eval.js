@@ -44,6 +44,8 @@ module.exports = class Help extends cmd{
         try{
             let evaled = await EVAL(input);
 
+            if(evaled.includes(this.bot.token)) return msg.channel.sendErrEmbed("Bruh this got my token in it")
+
             if(evaled.length > 2000){
                 let binKey = await this.bot.postBin(evaled);
                 return msg.channel.send(`https://hasteb.in/${binKey}.js`);
