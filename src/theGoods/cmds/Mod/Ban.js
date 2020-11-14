@@ -6,7 +6,7 @@ module.exports = class Help extends cmd{
             name: "ban",
             alli: [],
             category: "Moderation",
-            usage: "ban < user > [ --hard-ban ]",
+            usage: "ban < user >",
             bPerms: ["embedLinks", "banMembers"],
             mPerms: ["sendMessages", "banMembers"],
             cooldown: 1500,

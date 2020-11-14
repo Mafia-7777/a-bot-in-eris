@@ -24,7 +24,7 @@ module.exports = class Help extends cmd{
         let userData = await this.bot.getUserData(user.id)
         
         msg.channel.send({embed: {
-            description: `${user.username} has used one of my commands ${userData.cmdsUsed}`,
+            description: `${user.username} has used one of my commands ${userData.cmdsUsed} time(s)`,
             color: this.bot.colors.main
         }})
 
