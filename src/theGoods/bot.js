@@ -65,7 +65,8 @@ module.exports = class Bot extends eris.Client{
         try{
             let eventFile = new (require(eventPath))(this);
             let eventName = eventPath.split("/")[2].split(".")[0];
-            bot.on(eventName, (...args) => eventFile.runEvent(...args));
+            //bot.on(eventName, (...args) => eventFile.runEvent(...args));
+            this.on(eventName, (...args) => eventFile.runEvent(...args));
             this.logger.lightGreen(`Event loaded: ${eventName}`);
         }catch(err){
             this.logger.yellow(`Can not load command @ ${eventPath}, ${err}`);

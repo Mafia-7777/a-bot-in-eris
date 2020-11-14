@@ -28,7 +28,7 @@ const init = async () => {
 
     const eventFiles = await util.promisify(fs.readdir)(__dirname + "/theGoods/events/");
     eventFiles.forEach(file => {
-        bot.loadEvent(`./events/${file}`, bot);
+        bot.loadEvent(`./events/${file}`);
     });
 
 }
